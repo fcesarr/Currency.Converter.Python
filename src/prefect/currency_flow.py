@@ -6,7 +6,7 @@ from ..services.currency_service import CurrencyService
 
 retries:int=2
 
-@task(retries=retries)
+@task(retries=retries, retry_delay_seconds=10)
 def get_codes(currency_service:CurrencyService,
               endpoint:str,
               codes:list,
@@ -23,8 +23,6 @@ def get_latest(currency_service:CurrencyService,
     latest:dict = currency_service.get_latest(endpoint=endpoint, codes=codes)
     logger.info(f"Get latest currency successfully")
     return latest
-
-
 
 @flow(log_prints=True)
 def currency_flow(url:str,
