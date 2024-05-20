@@ -1,8 +1,9 @@
 # Currency.Converter.Python
 
-Prezados afim de manter a avaliação justa do código, criei uma outra branch onde refatorei o código entrge na main, por entender que este código não esta com uma boa qualidade.
-
-Peço para quem for avaliar esta entrega, se possivel avalie o codigo desta [branch](https://github.com/fcesarr/Currency.Converter.Python/tree/feature/implement_new_api), desde já agradeço a atenção
+> ***_NOTE:_***
+> Prezados afim de manter a avaliação justa do código, criei uma outra branch onde refatorei o código entrge na main, por entender que este código não esta com uma boa qualidade.
+>
+> Peço para quem for avaliar esta entrega, se possivel avalie o codigo desta [branch](https://github.com/fcesarr/Currency.Converter.Python/tree/feature/implement_new_api), desde já agradeço a atenção
 
 O projeto tem o intuito de obter dados de cotação das seguintes moedas "EUR", "USD", "CAD", "BRL".
 
