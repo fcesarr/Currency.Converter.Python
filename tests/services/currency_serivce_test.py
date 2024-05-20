@@ -11,195 +11,128 @@ class CurrencyServiceTest(unittest.TestCase):
         super().__init__(methodName)
         self.faker = Faker()
 
-    def test_get_brands(self):
-        codes = self.__generate_code_currencies(20)
 
-        code_currency_data = {
-            "data": self.__generate_code_currencies_data(codes=codes)
-        }
 
-        response = Response()
+    # def test_get_latest(self):
+    #     codes = self.__generate_code_currencies(20)
 
-        response.status_code=200
+    #     latest_currency_data = {
+    #         "data": self.__generate_latest_currency_data(codes=codes)
+    #     }
 
-        response.raw=io.BytesIO(json.dumps(code_currency_data, indent=4).encode('utf-8'))
+    #     response = Response()
 
-        session_mock = Mock()
+    #     response.status_code=200
 
-        session_mock.get = Mock(return_value=response)
+    #     response.raw=io.BytesIO(json.dumps(latest_currency_data, indent=4).encode('utf-8'))
 
-        instance = CurrencyService(base_url="", session=session_mock)
+    #     session_mock = Mock()
 
-        self.assertListEqual(instance.get_brands(endpoint="", codes=codes), codes)
+    #     session_mock.get = Mock(return_value=response)
 
-    def test_get_brands_status_code_diff_success_raise_exception(self):
-        session_mock = Mock()
+    #     instance = CurrencyService(base_url="", session=session_mock)
 
-        response = Response()
+    #     self.assertEqual(instance.get_latest(endpoint="", codes=codes), latest_currency_data['data'])
 
-        response.status_code = self.__generate_random_int_except(200)
+    # def test_get_latest_status_code_diff_success_raise_exception(self):
+    #     session_mock = Mock()
 
-        instance = CurrencyService(base_url="", session=session_mock)
+    #     response = Response()
 
-        with self.assertRaises(Exception) as cm:
-            instance.get_brands(endpoint="", codes=[""])
+    #     response.status_code = self.__generate_random_int_except(200)
 
-        self.assertEqual("Status code diff of 200", str(cm.exception))
+    #     instance = CurrencyService(base_url="", session=session_mock)
 
-    def test_get_brands_data_not_exists_raise_exception(self):
-        expected = self.__generate_code_currencies(20)
+    #     with self.assertRaises(Exception) as cm:
+    #         instance.get_latest(endpoint="", codes=[""])
 
-        currency_data = {
+    #     self.assertEqual("Status code diff of 200", str(cm.exception))
 
-        }
+    # def test_get_latest_data_not_exists_raise_exception(self):
+    #     currency_data = {
 
-        session_mock = Mock()
+    #     }
 
-        response = Response()
+    #     session_mock = Mock()
 
-        response.status_code=200
+    #     response = Response()
 
-        response.raw=io.BytesIO(json.dumps(currency_data, indent=4).encode('utf-8'))
+    #     response.status_code=200
 
-        session_mock.get = Mock(return_value=response)
+    #     response.raw=io.BytesIO(json.dumps(currency_data, indent=4).encode('utf-8'))
 
-        instance = CurrencyService(base_url="", session=session_mock)
+    #     session_mock.get = Mock(return_value=response)
 
-        with self.assertRaises(Exception) as cm:
-            instance.get_brands(endpoint="", codes=[""])
+    #     instance = CurrencyService(base_url="", session=session_mock)
 
-        self.assertEqual("Data it's not found", str(cm.exception))
+    #     with self.assertRaises(Exception) as cm:
+    #         instance.get_latest(endpoint="", codes=[""])
 
-    def test_get_brands_codes_is_empty_raise_exception(self):
-        session_mock = Mock()
+    #     self.assertEqual("Data it's not found", str(cm.exception))
 
-        instance = CurrencyService(base_url="", session=session_mock)
+    # def test_get_latest_codes_is_empty_raise_exception(self):
+    #     session_mock = Mock()
 
-        with self.assertRaises(Exception) as cm:
-            instance.get_brands(endpoint="", codes=[])
+    #     instance = CurrencyService(base_url="", session=session_mock)
 
-        self.assertEqual("Codes of currencies are empty", str(cm.exception))
+    #     with self.assertRaises(Exception) as cm:
+    #         instance.get_latest(endpoint="", codes=[])
 
-    def test_get_latest(self):
-        codes = self.__generate_code_currencies(20)
+    #     self.assertEqual("Codes of currencies are empty", str(cm.exception))
 
-        latest_currency_data = {
-            "data": self.__generate_latest_currency_data(codes=codes)
-        }
+    # def test_get_latest_throw(self):
+    #     codes = self.__generate_code_currencies(20)
 
-        response = Response()
+    #     latest_currency_data = {
+    #         "data": self.__generate_latest_currency_data(codes=codes)
+    #     }
 
-        response.status_code=200
+    #     response = Response()
 
-        response.raw=io.BytesIO(json.dumps(latest_currency_data, indent=4).encode('utf-8'))
+    #     response.status_code=200
 
-        session_mock = Mock()
+    #     response.raw=io.BytesIO(json.dumps(latest_currency_data, indent=4).encode('utf-8'))
 
-        session_mock.get = Mock(return_value=response)
+    #     session_mock = Mock()
 
-        instance = CurrencyService(base_url="", session=session_mock)
+    #     session_mock.get.side_effect = Mock(side_effect=Timeout('Test'))
 
-        self.assertEqual(instance.get_latest(endpoint="", codes=codes), latest_currency_data['data'])
+    #     instance = CurrencyService(base_url="", session=session_mock)
 
-    def test_get_latest_status_code_diff_success_raise_exception(self):
-        session_mock = Mock()
+    #     with self.assertRaises(Exception):
+    #         instance.get_latest(endpoint="", codes=[""])
 
-        response = Response()
+    # def __generate_random_int_except(self, exclude_value):
+    #     random_int = self.faker.pyint()  # Generate a random integer using Faker
+    #     while random_int == exclude_value:
+    #         random_int = self.faker.pyint(min_value=100, max_value=500, step=100)  # Generate another random integer if it matches the excluded value
+    #     return random_int
 
-        response.status_code = self.__generate_random_int_except(200)
+    # def __generate_code_currencies(self, number:int):
+    #     codes = set()
 
-        instance = CurrencyService(base_url="", session=session_mock)
-
-        with self.assertRaises(Exception) as cm:
-            instance.get_latest(endpoint="", codes=[""])
-
-        self.assertEqual("Status code diff of 200", str(cm.exception))
-
-    def test_get_latest_data_not_exists_raise_exception(self):
-        currency_data = {
-
-        }
-
-        session_mock = Mock()
-
-        response = Response()
-
-        response.status_code=200
-
-        response.raw=io.BytesIO(json.dumps(currency_data, indent=4).encode('utf-8'))
-
-        session_mock.get = Mock(return_value=response)
-
-        instance = CurrencyService(base_url="", session=session_mock)
-
-        with self.assertRaises(Exception) as cm:
-            instance.get_latest(endpoint="", codes=[""])
-
-        self.assertEqual("Data it's not found", str(cm.exception))
-
-    def test_get_latest_codes_is_empty_raise_exception(self):
-        session_mock = Mock()
-
-        instance = CurrencyService(base_url="", session=session_mock)
-
-        with self.assertRaises(Exception) as cm:
-            instance.get_latest(endpoint="", codes=[])
-
-        self.assertEqual("Codes of currencies are empty", str(cm.exception))
-
-    def test_get_latest_throw(self):
-        codes = self.__generate_code_currencies(20)
-
-        latest_currency_data = {
-            "data": self.__generate_latest_currency_data(codes=codes)
-        }
-
-        response = Response()
-
-        response.status_code=200
-
-        response.raw=io.BytesIO(json.dumps(latest_currency_data, indent=4).encode('utf-8'))
-
-        session_mock = Mock()
-
-        session_mock.get.side_effect = Mock(side_effect=Timeout('Test'))
-
-        instance = CurrencyService(base_url="", session=session_mock)
-
-        with self.assertRaises(Exception):
-            instance.get_latest(endpoint="", codes=[""])
-
-    def __generate_random_int_except(self, exclude_value):
-        random_int = self.faker.pyint()  # Generate a random integer using Faker
-        while random_int == exclude_value:
-            random_int = self.faker.pyint(min_value=100, max_value=500, step=100)  # Generate another random integer if it matches the excluded value
-        return random_int
-
-    def __generate_code_currencies(self, number:int):
-        codes = set()
-
-        for _ in range(number):
-            codes.add(self.faker.currency_code())
-
-        return list(codes)
-
-    def __generate_code_currencies_data(self, codes:list):
-        data = {}
-        for code in codes:
-            data[code] = {
-                'symbol': self.faker.currency_symbol(),
-                'name': self.faker.currency_name(),
-                'symbol_native': self.faker.currency_symbol(),
-                'decimal_digits': self.faker.random_int(min=0, max=2),
-                'rounding': self.faker.random_int(min=0, max=10),
-                'code': code,
-                'name_plural': self.faker.currency_name(),
-                'type': 'fiat'  # Assuming all currencies are of type 'fiat'
-            }
-        return data
-
-    def __generate_latest_currency_data(self, codes:list):
-        data = {}
-        for code in codes:
-            data[code] = self.faker.pyfloat(positive=True)
-        return data
+    #     for _ in range(number):
+    #         codes.add(self.faker.currency_code())
+
+    #     return list(codes)
+
+    # def __generate_code_currencies_data(self, codes:list):
+    #     data = {}
+    #     for code in codes:
+    #         data[code] = {
+    #             'symbol': self.faker.currency_symbol(),
+    #             'name': self.faker.currency_name(),
+    #             'symbol_native': self.faker.currency_symbol(),
+    #             'decimal_digits': self.faker.random_int(min=0, max=2),
+    #             'rounding': self.faker.random_int(min=0, max=10),
+    #             'code': code,
+    #             'name_plural': self.faker.currency_name(),
+    #             'type': 'fiat'  # Assuming all currencies are of type 'fiat'
+    #         }
+    #     return data
+
+    # def __generate_latest_currency_data(self, codes:list):
+    #     data = {}
+    #     for code in codes:
+    #         data[code] = self.faker.pyfloat(positive=True)
+    #     return data

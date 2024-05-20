@@ -37,13 +37,13 @@ class CurrencyApi(ABC):
         return self.treat_latest(json=json)
 
     @abstractmethod
-    def treat_codes(self, json:dict):
+    def treat_codes(self, json:dict): # pragma: no cover
         pass
 
     @abstractmethod
-    def treat_latest(self, json:dict):
+    def treat_latest(self, json:dict): # pragma: no cover
         pass
 
     @abstractmethod
-    def _validate_status_code(self, response:Response):
+    def _validate_status_code(self, response:Response): # pragma: no cover
         pass
