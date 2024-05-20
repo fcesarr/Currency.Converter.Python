@@ -45,7 +45,7 @@ docker compose up currency-prefect-timeout currency-api-timeout
 
 #### Estrutura do projeto
 
-Preferei semprar em dois modulos `prefect` e `services`, pelo segunite motivo, numa situação hipotetica em que fosse necessario obtermos dados das moedas e suas cotações através de um api por exemplo, poderiamos cirar um modulo `api`e reaproveitar o código criado no modulo `services`.
+Preferi semprar em dois modulos `prefect`, `services` e `apis`, pelo segunite motivo, numa situação hipotetica em que fosse necessario obtermos dados das moedas e suas cotações através de uma nova api por exemplo, bastaria extendermos a classe `CurrencyApi`  e reaproveitar o código nela existente.
 
 #### Tasks
 
