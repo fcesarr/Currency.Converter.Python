@@ -21,5 +21,5 @@ if __name__ == '__main__':
     currency_flow(name="FreeCurrencyApi",
                   currency_apis=currency_apis)
 
-    currency_flow(name="FastForexApi",
-                  currency_apis=currency_apis)
+    # currency_flow(name="FastForexApi",
+    #               currency_apis=currency_apis)

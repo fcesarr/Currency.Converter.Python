@@ -1,14 +1,36 @@
 services:
-  currency-prefect:
-    image: currency-prefect
-    hostname: currency-prefect
-    build:
-        context: .
-        dockerfile: ./src/prefect/Dockerfile
-    deploy:
-      replicas: 1
-    restart: always
-    working_dir: /app
+    currency-prefect:
+        image: currency-prefect
+        hostname: currency-prefect
+        build:
+            context: .
+            dockerfile: ./src/prefect/Dockerfile
+        deploy:
+            replicas: 1
+        restart: on-failure
+
+    currency-api-timeout:
+        image: currency-api-timeout
+        hostname: currency-api-timeout
+        build:
+            context: ./fake
+            dockerfile: ./Dockerfile
+        deploy:
+            replicas: 1
+        restart: on-failure
+
+    currency-prefect-timeout:
+        image: currency-prefect
+        hostname: currency-prefect
+        build:
+            context: .
+            dockerfile: ./src/prefect/Dockerfile
+        deploy:
+            replicas: 1
+        restart: on-failure
+        entrypoint: ["python","-m","src.prefect.fake_timeout"]
+        depends_on: ["currency-api-timeout"]
+
 
 networks:
   default:

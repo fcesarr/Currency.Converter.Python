@@ -7,10 +7,10 @@ Criei o fluxo `currency_flow`, que por sua vez chama duas tasks, sendo a task `g
 ## Configurando aplicação
 
 ```bash
-# 1 inicia pipenv
+# 1 init pipenv
 pipenv shell
 
-#2 instala dependencias
+#2 install dependencias
 pipenv install
 ```
 
@@ -19,6 +19,27 @@ pipenv install
 ```bash
 python -m src.prefect
 ```
+
+## Docker
+
+```bash
+# 1 build image
+docker compose build --no-cache
+
+#2 run container
+docker compose up currency-prefect
+```
+
+#### Simulando timeout com Docker
+
+```bash
+# 1 build image
+docker compose build --no-cache
+
+#2 run container
+docker compose up currency-prefect-timeout currency-api-timeout
+```
+
 
 ### Observações
 

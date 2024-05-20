@@ -13,7 +13,7 @@ def get_codes(currency_service:CurrencyService,
     logger.info(f"{currency_service.name}: Get codes successfully")
     return codes
 
-@task(retries=retries, retry_delay_seconds=10)
+@task(retries=retries, retry_delay_seconds=10, timeout_seconds=4)
 def get_latest(currency_service:CurrencyService,
                codes:list,
                logger:logging.Logger):
