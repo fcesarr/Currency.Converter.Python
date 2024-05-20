@@ -1,5 +1,9 @@
 # Currency.Converter.Python
 
+Prezados afim de manter a avaliação justa do código, criei uma outra branch onde refatorei o código entrge na main, por entender que este código não esta com uma boa qualidade.
+
+Peço para quem for avaliar esta entrega, se possivel avalie o codigo desta [branch](https://github.com/fcesarr/Currency.Converter.Python/tree/feature/implement_new_api), desde já agradeço a atenção
+
 O projeto tem o intuito de obter dados de cotação das seguintes moedas "EUR", "USD", "CAD", "BRL".
 
 Criei o fluxo `currency_flow`, que por sua vez chama duas tasks, sendo a task `get_codes` responsável por obter dados das moedas e a task `get_latest` responsável por obter cotação das moedas.
@@ -24,7 +28,7 @@ python -m src.prefect
 
 #### Estrutura do projeto
 
-Preferei semprar em dois modulos `prefect` e `services`, pelo segunite motivo, numa situação hipotetica em que fosse necessario obtermos dados das moedas e suas cotações através de um api por exemplo, poderiamos cirar um modulo `api`e reaproveitar o código criado no modulo `services`.
+Preferi semprar em dois modulos `prefect` e `services`, pelo segunite motivo, numa situação hipotetica em que fosse necessario obtermos dados das moedas e suas cotações através de um api por exemplo, poderiamos cirar um modulo `api`e reaproveitar o código criado no modulo `services`.
 
 #### Tasks
 
