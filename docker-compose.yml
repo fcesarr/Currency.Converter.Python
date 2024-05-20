@@ -1,0 +1,16 @@
+services:
+  currency-prefect:
+    image: currency-prefect
+    hostname: currency-prefect
+    build:
+        context: .
+        dockerfile: ./src/prefect/Dockerfile
+    deploy:
+      replicas: 1
+    restart: always
+    working_dir: /app
+
+networks:
+  default:
+    driver: bridge
+    name: currency-api
