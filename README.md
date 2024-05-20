@@ -55,12 +55,6 @@ Ambas as tasks podem ser rexecutadas em caso de falhas ao menos 2 vezes além da
 
 ![alt text](img/image-1.png)
 
-#### Timeout
-
-Afim de simular um timeout, cofigurei um timeout no método `get_latest` na classe `CurrencyService`, onde o valor de timeout é aumentado a cada  falha na execução, devido erro provocado por timeout.
-
-![alt text](img/image-2.png)
-
 #### Cobertura de testes
 
 ![alt text](img/image-3.png)
